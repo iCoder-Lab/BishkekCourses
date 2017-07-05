@@ -61,7 +61,4 @@ module.exports = function(app)
       response.send(course)
     });
   })
-
-
-
 }
