@@ -5,7 +5,7 @@ Back-End for Courses. MongoDB and MySQL versions.
 
 # Post Requests
 
-To add a Course: /addCourse + _JSON
+To add a Course: /addCourse + JSON
 
 # Get Requests
 
