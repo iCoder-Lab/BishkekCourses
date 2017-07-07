@@ -20,19 +20,19 @@ To get All Categories -> id (course id), imagePath, name (category name), id (ca
 
 ### Category
 
-    "id": String,
+    "_id": String,
     "name": String,
     "sabCategories": Array<SubCategory>
 
 ### SubCategory
 
-    "id": String,
+    "_id": String,
     "name": String,
     "imagePath": String
 
 ### Course
 
-    "id": String,
+    "_id": String,
     "name": String,
     "description" : String,
     "branches": Array<Branch>,
@@ -43,7 +43,7 @@ To get All Categories -> id (course id), imagePath, name (category name), id (ca
 
 ### Branch
 
-    "id": String,
+    "_id": String,
     "phone": String,
     "latitude": String,
     "longitude": String,
@@ -51,8 +51,19 @@ To get All Categories -> id (course id), imagePath, name (category name), id (ca
 
 ### Contact
 
-    "id": String,
+    "_id": String,
     "contactType": Int,
     "data": String
 
+### Service
 
+     "_id": String,
+     "name": String,
+     "price": Int,
+     "description": String
+     
+### CourseImage 
+
+     "_id": String,
+     "isLogo": Bool,
+     "imagePath": String
