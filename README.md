@@ -1,9 +1,8 @@
 # Courses
 Back-End for Courses. MongoDB and MySQL versions.
 
-# Use Mongo version.
 
-# Post Requests
+## Post Requests
 
 * /addCourse
     - takes Course
@@ -12,7 +11,7 @@ Back-End for Courses. MongoDB and MySQL versions.
 * /addSubCategories
     - takes PostSubCategories
 
-# Get Requests
+## Get Requests
 
 * /getAllCourses 
    - returns Array< Course >
@@ -27,6 +26,12 @@ Back-End for Courses. MongoDB and MySQL versions.
 * /getCourse/{course._id}
    - returns Course
 
+## Delete Requests
+    * /course/{course._id}
+    * /category/{category._id} 
+    - !!! works if category does not contain any course
+    * /subCategory/{subCategory._id}
+    - !!! works if category does not contain any course
 
 # Models:
 
@@ -98,3 +103,8 @@ Back-End for Courses. MongoDB and MySQL versions.
 
     "categoryId": String,
     "subCategories": Array<SubCategory>
+    
+    
+### ErrorModel
+    "errorMessage": String
+
