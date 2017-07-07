@@ -6,16 +6,16 @@ Back-End for Courses. MongoDB and MySQL versions.
 # Post Requests
 
 * /addCourse 
-    Takes Course
+    - Takes Course
 
 # Get Requests
 
 * /getAllCourses 
-    returns Array<Course>
+   - returns Array<Course>
 * /getAllBranches
-    returns Array<CourseBranch>
+   - returns Array<CourseBranch>
 * /getAllCategories
-    returns Array<Category>
+   - returns Array<Category>
 
 
 # Models:
