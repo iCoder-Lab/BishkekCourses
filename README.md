@@ -16,45 +16,43 @@ To get All branches -> id (course id), name (course name), address, longtitude, 
 To get All Categories -> id (course id), imagePath, name (category name), id (category id), name (subcategory name), imagePath: /getAllCategories
 
 
-Models:
+# Models:
 
-Category: {
+### Category
+
     "id": String,
     "name": String,
     "sabCategories": Array<SubCategory>
-}
-SubCategory: {
+
+### SubCategory
+
     "id": String,
     "name": String,
     "imagePath": String
-}
 
-Course: {
-  "id": String,
-  "name": String,
-  "description" : String,
-  "branches": Array<Branch>,
-  "contacts": Array<Contact>,
-  "services": Array<Service>,
-  "categories": Array<Category>,
-  "images": Array<CourseImage>
-}
+### Course
 
-Branch:
-{
+    "id": String,
+    "name": String,
+    "description" : String,
+    "branches": Array<Branch>,
+    "contacts": Array<Contact>,
+    "services": Array<Service>,
+    "categories": Array<Category>,
+    "images": Array<CourseImage>
 
-  "id": String,
-  "phone": String,
-  "latitude": String,
-  "longitude": String,
-  "address": String"
-}
+### Branch
 
-Contact: 
-{
+    "id": String,
+    "phone": String,
+    "latitude": String,
+    "longitude": String,
+    "address": String"
 
-  "id": String
-  "contactType": Int,
-  "data": String
-}
+### Contact
+
+    "id": String,
+    "contactType": Int,
+    "data": String
+
 
