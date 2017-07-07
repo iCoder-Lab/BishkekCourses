@@ -5,17 +5,32 @@ Back-End for Courses. MongoDB and MySQL versions.
 
 # Post Requests
 
-* /addCourse 
-    - Takes Course
+* /addCourse
+    - takes Course
+* /addCategory
+    - takes Category
+* /addSubCategories
+    - takes PostSubCategories
 
 # Get Requests
 
 * /getAllCourses 
    - returns Array<Course>
+   
 * /getAllBranches
    - returns Array<CourseBranch>
+   
 * /getAllCategories
    - returns Array<Category>
+   
+* /getCourses/{subCategory._id}
+    returns Array<SimplifiedCourse>
+    
+* /getCourses/{category._id}
+    returns Array<SimplifiedCourse>
+
+* /getCourse/{course._id}
+    returns Course
 
 
 # Models:
@@ -76,4 +91,15 @@ Back-End for Courses. MongoDB and MySQL versions.
     "name": String,
     "branches: Array<Branch>
     
-   
+    
+### SimplifiedCourse
+
+    "_id": String,
+    "name": String,
+    "description": String,
+    "images": Array<CourseImage>
+    
+### PostSubCategories
+
+    "categoryId": String,
+    "sabCategories": Array<SubCategory>
