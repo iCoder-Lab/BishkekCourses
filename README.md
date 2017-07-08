@@ -43,7 +43,7 @@ Back-End for Courses. MongoDB and MySQL versions.
 ### Category
     "_id": String,
     "name": String,
-    "sabCategories": Array<SubCategory>
+    "subCategories": Array<SubCategory>
 
 ### Branch
     "_id": String,
