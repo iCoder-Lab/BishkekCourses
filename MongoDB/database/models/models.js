@@ -15,8 +15,8 @@ module.exports = function(mongoose) {
 
   var category = new Schema
   ({
-    name: String
-    subCategories: subCategories
+    name: String,
+    subCategories: subCategories 
   })
   var categories = []
   categories.push(category)
