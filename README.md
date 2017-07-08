@@ -13,18 +13,20 @@ Back-End for Courses. MongoDB and MySQL versions.
 
 ## Get Requests
 
-* /getAllCourses 
+* /getAllCoursesWithDetails
    - returns Array< Course >
+* /getAllCoursesWithoutDetails
+   - returns Array< Course >
+* /getCoursesFromCategory/{category._id}
+   - returns Array < SimplifiedCourse >
+* /getCoursesFromSubcategory/{category._id}/{subCategory._id}
+   - returns Array< SimplifiedCourse >
+* /getCourseWithID/{course._id}
+   - returns Course
 * /getAllBranches
-   - returns Array< CourseBranch >
+   - returns Array< Branch >
 * /getAllCategories
    - returns Array< Category >
-* /getCourses/{category._id}
-   - returns Array < SimplifiedCourse >
-* /getCourses/{category._id}/{subCategory._id}
-   - returns Array< SimplifiedCourse >
-* /getCourse/{course._id}
-   - returns Course
 
 ## Delete Requests
     * /course/{course._id}
