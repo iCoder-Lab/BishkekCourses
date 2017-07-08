@@ -39,5 +39,5 @@ module.exports = function(app)
   app.post('/addCategory', bP, function(request, response)
   {
 
-  }
+  })
 }
