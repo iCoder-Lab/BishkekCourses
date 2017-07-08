@@ -4,14 +4,14 @@ var mongoose = require('mongoose')
 mongoose.Promise = require('bluebird');
 var url = 'mongodb://127.0.0.1/test'
 mongoose.connect(url, {useMongoClient: true});
-var Course = require('../database/models/models').Course
+var models = require('../database/models/models')
 
 module.exports = function(app)
 {
   app.post('/addCourse', bP, function(request, response)
   {
     var inp = request.body
-    var course = new Course(inp)
+    var course = new models.Course(inp)
 
     models.Course
       .find({'name': inp.name}).limit(1)
