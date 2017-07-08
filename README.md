@@ -28,10 +28,10 @@ Back-End for Courses. MongoDB and MySQL versions.
 
 
 ## Delete Requests
-    * /course/{course._id}
-    * /category/{category._id} 
+    * /deleteCourse/{course._id}
+    * /deleteCategory/{category._id} 
     - !!! works if category does not contain any course
-    * /subCategory/{subCategory._id}
+    * /deleteSubCategory/{subCategory._id}
     - !!! works if category does not contain any course
 
 # Models:
