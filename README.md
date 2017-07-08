@@ -89,7 +89,7 @@ Back-End for Courses. MongoDB and MySQL versions.
     "_id": String,
     "name": String,
     "description": String,
-    "images": Array<CourseImage>
+    "images": Array<Image>
     
 ### PostSubCategories
     "categoryId": String,
