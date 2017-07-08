@@ -33,7 +33,7 @@ module.exports = function(mongoose) {
 
   var contact = new Schema
   ({
-    contactType: Int,
+    contactType: Number,
     data: String
   })
   var contacts = []
