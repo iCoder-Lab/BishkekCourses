@@ -67,11 +67,6 @@ Back-End for Courses. MongoDB and MySQL versions.
      "_id": String,
      "isLogo": Bool,
      "imagePath": String
-     
-### CourseBranch
-    "_id": String,
-    "name": String,
-    "branches: Array<Branch>
     
 ### Course
     "_id": String,
@@ -82,6 +77,11 @@ Back-End for Courses. MongoDB and MySQL versions.
     "services": Array<Service>,
     "categories": Array<Category>,
     "images": Array<Image>
+     
+### CourseBranch
+    "_id": String,
+    "name": String,
+    "branches: Array<Branch>
     
 ### SimplifiedCourse
     "_id": String,
