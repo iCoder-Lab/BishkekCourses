@@ -47,17 +47,6 @@ Back-End for Courses. MongoDB and MySQL versions.
     "name": String,
     "imagePath": String
 
-### Course
-
-    "_id": String,
-    "name": String,
-    "description" : String,
-    "branches": Array<Branch>,
-    "contacts": Array<Contact>,
-    "services": Array<Service>,
-    "categories": Array<Category>,
-    "images": Array<Image>
-
 ### Branch
 
     "_id": String,
@@ -91,6 +80,16 @@ Back-End for Courses. MongoDB and MySQL versions.
     "name": String,
     "branches: Array<Branch>
     
+### Course
+
+    "_id": String,
+    "name": String,
+    "description" : String,
+    "branches": Array<Branch>,
+    "contacts": Array<Contact>,
+    "services": Array<Service>,
+    "categories": Array<Category>,
+    "images": Array<Image>
     
 ### SimplifiedCourse
 
