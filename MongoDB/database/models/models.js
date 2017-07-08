@@ -67,12 +67,12 @@ module.exports = function(mongoose) {
       services: services
   })
   var models = {
-    Course : mongoose.model('Course', course)
-    SubCategory : mongoose.model('SubCategory', subCategory)
-    Category : mongoose.model('Category', category)
-    Branch : mongoose.model('Branch', branch)
-    Contact : mongoose.model('Contact', contact)
-    Service : mongoose.model('Service', service)
+    Course : mongoose.model('Course', course),
+    SubCategory : mongoose.model('SubCategory', subCategory),
+    Category : mongoose.model('Category', category),
+    Branch : mongoose.model('Branch', branch),
+    Contact : mongoose.model('Contact', contact),
+    Service : mongoose.model('Service', service),
     Image : mongoose.model('Image', image)
   }
   return models
