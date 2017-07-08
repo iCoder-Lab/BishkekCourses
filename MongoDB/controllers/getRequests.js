@@ -2,9 +2,10 @@ var app = require('express')()
 var bP = require('body-parser').json()
 var mongoose = require('mongoose')
 mongoose.Promise = require('bluebird');
-var url = 'mongodb://127.0.0.1/courses'
+var url = 'mongodb://127.0.0.1/test'
 mongoose.connect(url, {useMongoClient: true});
-var models = require('../database/models/models')(mongoose)
+//var models = require('../database/models/models')
+var Course = require('../database/models/models').Course
 
 module.exports = function(app)
 {
