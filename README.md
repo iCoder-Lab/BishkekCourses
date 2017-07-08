@@ -56,7 +56,7 @@ Back-End for Courses. MongoDB and MySQL versions.
     "contacts": Array<Contact>,
     "services": Array<Service>,
     "categories": Array<Category>,
-    "images": Array<CourseImage>
+    "images": Array<Image>
 
 ### Branch
 
@@ -79,7 +79,7 @@ Back-End for Courses. MongoDB and MySQL versions.
      "price": Int,
      "description": String
      
-### CourseImage 
+### Image 
 
      "_id": String,
      "isLogo": Bool,
@@ -106,5 +106,5 @@ Back-End for Courses. MongoDB and MySQL versions.
     
     
 ### ErrorModel
-    "errorMessage": String
+    "error": String
 
