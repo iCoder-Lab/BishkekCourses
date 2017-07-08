@@ -4,7 +4,7 @@ var mongoose = require('mongoose')
 mongoose.Promise = require('bluebird');
 var url = 'mongodb://127.0.0.1/courses'
 mongoose.connect(url, {useMongoClient: true});
-var models = require('../database/models/course')(mongoose)
+var models = require('../database/models/models')(mongoose)
 
 module.exports = function(app)
 {
