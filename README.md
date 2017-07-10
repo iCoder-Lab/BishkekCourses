@@ -26,7 +26,7 @@ Back-End for Courses. MongoDB and MySQL versions.
 * /getAllCategories
    - returns Array< Category >
 * /getAllContactTypes
-   - returns Array< Category >
+   - returns Array< PostContactType >
 
 
 ## Delete Requests
@@ -73,10 +73,6 @@ Back-End for Courses. MongoDB and MySQL versions.
     "services": Array<Service>,
     "categories": Array<Category>,
     "images": Array<Image>
-     
-### CourseBranch
-    "name": String,
-    "branches: Array<Branch>
     
 ### SimplifiedCourse
     "name": String,
@@ -86,8 +82,10 @@ Back-End for Courses. MongoDB and MySQL versions.
 ### PostSubCategories
     "categoryName": String,
     "subCategories": Array<SubCategory>
-    
+         
+### PostContactType
+    "contactTypeInt": Int,
+    "contactTypeName: String
     
 ### ErrorModel
     "error": String
-
