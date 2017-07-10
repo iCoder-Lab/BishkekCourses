@@ -3,7 +3,6 @@ Back-End for Courses. MongoDB and MySQL versions.
 
 
 ## Post Requests
-
 * /addCourse
     - takes Course
 * /addCategory
@@ -12,25 +11,27 @@ Back-End for Courses. MongoDB and MySQL versions.
     - takes PostSubCategories
 
 ## Get Requests
-
-* /getAllCourses 
-   - returns Array< Course >
+* /getAllCourses
+   - returns Array< SimplifiedCourse >
+* /getCoursesByCategory/{category.name}
+   - returns Array < SimplifiedCourse >
+* /getCoursesBySubcategory/{subCategory.name}
+   - returns Array< SimplifiedCourse >
+* /getCourseByID/{course._id}
+   - returns Course
 * /getAllBranches
-   - returns Array< CourseBranch >
+   - returns Array< Branch >
 * /getAllCategories
    - returns Array< Category >
-* /getCourses/{category._id}
-   - returns Array < SimplifiedCourse >
-* /getCourses/{category._id}/{subCategory._id}
-   - returns Array< SimplifiedCourse >
-* /getCourse/{course._id}
-   - returns Course
+* /getAllContactTypes
+   - returns Array< Category >
+
 
 ## Delete Requests
-    * /course/{course._id}
-    * /category/{category._id} 
+    * /deleteCourse/{course._id}
+    * /deleteCategory/{category.name} 
     - !!! works if category does not contain any course
-    * /subCategory/{subCategory._id}
+    * /deleteSubCategory/{subCategory.name}
     - !!! works if category does not contain any course
 
 # Models:
@@ -43,7 +44,7 @@ Back-End for Courses. MongoDB and MySQL versions.
 ### Category
     "_id": String,
     "name": String,
-    "sabCategories": Array<SubCategory>
+    "subCategories": Array<SubCategory>
 
 ### Branch
     "_id": String,
@@ -87,10 +88,10 @@ Back-End for Courses. MongoDB and MySQL versions.
     "_id": String,
     "name": String,
     "description": String,
-    "images": Array<CourseImage>
+    "images": Array<Image>
     
 ### PostSubCategories
-    "categoryId": String,
+    "categoryName": String,
     "subCategories": Array<SubCategory>
     
     
