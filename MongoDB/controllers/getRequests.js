@@ -23,27 +23,54 @@ module.exports = function(app)
 
   app.get('/getAllBranches', function(request, response)
   {
+    var previousLong;
+    var previousLati;
     models.Branch
-      .find({})
-      .then(function(branches) {
-        response.send(branches)
-      })
-      .catch(function(error) {
-        response.send({error:error})
-      })
+    .find()
+    .sort({'longitude': -1, 'latitude': -1})
+    .exec()
+    .each(function (branch) {
+      if(branch.longitude == previousLong && branch.latitude == previousLati) {
+        branch.remove()
+      }
+      previousLong = branch.longitude
+      previousLati = branch.latitude
+    })
+    .then(function(result){
+      models.Branch
+        .find({})
+        .then(function(branches) {
+          response.send(branches)
+        })
+        .catch(function(error) {
+          response.send({error:error})
+        })
+    })
   })
 
   app.get('/getAllCategories', function(request, response)
   {
-    models.Course
-      .find({})
-      .select({"categories": 1, "_id": 0})
-      .then(function(branches) {
-        response.send(branches)
-      })
-      .catch(function(error){
-        response.send({error:error})
-      })
+    var previousName;
+    models.Category
+    .find()
+    .sort('name')
+    .exec()
+    .each(function (course) {
+      if (course.name == previousName) {
+        course.remove()
+      }
+      previousName = course.name
+    })
+    .then(function(result){
+      models.Category
+        .find()
+        .then(function(branches) {
+          response.send(branches)
+        })
+        .catch(function(error){
+          response.send({error:error})
+        })
+    })
   })
 
   app.get('/getAllContactTypes', function(request, response)

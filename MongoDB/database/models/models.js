@@ -49,7 +49,7 @@ var images = []
 images.push(image)
 
 var course = new Schema ({
-    name: [{ type: String, unique: true }],
+    name: { type: String, unique: true },
     description: String,
     branches: branches,
     categories: categories,
