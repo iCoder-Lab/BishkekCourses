@@ -6,23 +6,20 @@ var url = 'mongodb://127.0.0.1/courses'
 mongoose.connect(url, {useMongoClient: true});
 var models = require('../database/models/models')
 
-module.exports = function(app)
-{
-  app.get('/getAllCourses', function(request, response)
-    {
-      models.Course
-        .find()
-        .select({"name": 1, "description": 2, "images": 3, "_id": 4})
-        .then(function(branches) {
-          response.send(branches)
-        })
-        .catch(function(error) {
-          response.send({error:"error"})
-        })
-    })
+module.exports = function(app) {
+  app.get('/getAllCourses', function(request, response) {
+    models.Course
+      .find()
+      .select({"name": 1, "description": 2, "images": 3, "_id": 0})
+      .then(function(branches) {
+        response.send(branches)
+      })
+      .catch(function(error) {
+        response.send({error:"error"})
+      })
+  })
 
-  app.get('/getAllBranches', function(request, response)
-  {
+  app.get('/getAllBranches', function(request, response) {
     var previousLong;
     var previousLati;
     models.Branch
@@ -36,7 +33,7 @@ module.exports = function(app)
       previousLong = branch.longitude
       previousLati = branch.latitude
     })
-    .then(function(result){
+    .then(function(result) {
       models.Branch
         .find({})
         .then(function(branches) {
@@ -48,8 +45,7 @@ module.exports = function(app)
     })
   })
 
-  app.get('/getAllCategories', function(request, response)
-  {
+  app.get('/getAllCategories', function(request, response) {
     var previousName;
     models.Category
     .find()
@@ -61,74 +57,68 @@ module.exports = function(app)
       }
       previousName = course.name
     })
-    .then(function(result){
+    .then(function(result) {
       models.Category
         .find()
         .then(function(branches) {
           response.send(branches)
         })
-        .catch(function(error){
+        .catch(function(error) {
           response.send({error:error})
         })
     })
   })
 
-  app.get('/getAllContactTypes', function(request, response)
-  {
+  app.get('/getAllContactTypes', function(request, response) {
 
   })
 
-  app.get('/getCoursesByCategory/:category', function(request, response)
-  {
+  app.get('/getCoursesByCategory/:category', function(request, response) {
     models.Course
       .find({"categories.name": request.params.category})
-      .select({"name": 1, "description": 2, "images": 3, "_id": 4})
+      .select({"name": 1, "description": 2, "images": 3, "_id": 0})
       .then(function(result) {
         response.send(result)
       })
-      .catch(function(error){
+      .catch(function(error) {
         console.log(error)
         response.send({error:error})
       })
   })
 
-  app.get('/getCoursesBySubcategory/:subCategory', function(request, response)
-  {
+  app.get('/getCoursesBySubcategory/:subCategory', function(request, response) {
     models.Course
       .find({"categories.subCategories.name": request.params.subCategory})
-      .select({"name": 1, "description": 2, "images": 3, "_id": 4})
+      .select({"name": 1, "description": 2, "images": 3, "_id": 0})
       .then(function(result) {
         response.send(result)
       })
-      .catch(function(error){
+      .catch(function(error) {
         console.log(error)
         response.send({error:error})
       })
   })
 
-  app.get('/getCourseByID/:id', function(request, response)
-  {
+  app.get('/getCourseByName/:name', function(request, response) {
     models.Course
-      .find({"_id": request.params.id})
+      .find({"name": request.params.name})
       .then(function(result) {
         response.send(result)
       })
-      .catch(function(error){
+      .catch(function(error) {
         console.log(error)
         response.send({error: error})
       })
   })
 
-  app.get('/getCourse/:categoryID/:subcatID', function(request, response)
-  {
+  app.get('/getCourseByBoth/:categoryname/:subcatname', function(request, response) {
     models.Course
-      .find({ $and: [{'category._id': request.params.categoryID}, {'category.subCategory._id': request.params.subcatID}]})
-      .select({'_id': 1, 'name': 2, 'images': 3, 'branches.address': 4, 'services.name': 5})
+      .find({ $and: [{'categories.name': request.params.categoryname}, {'categories.subCategories.name': request.params.subcatname}]})
+      .select({'name': 2, 'images': 3, 'description': 4, '_id': 0})
       .then(function(result) {
         response.send(result)
       })
-      .catch(function(error){
-        console.log(error)
+      .catch(function(error) {
         response.send({error:error})
       })
   })
