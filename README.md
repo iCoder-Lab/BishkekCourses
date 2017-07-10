@@ -37,40 +37,33 @@ Back-End for Courses. MongoDB and MySQL versions.
 # Models:
 
 ### SubCategory
-    "_id": String,
     "name": String,
     "imagePath": String
     
 ### Category
-    "_id": String,
     "name": String,
     "subCategories": Array<SubCategory>
 
 ### Branch
-    "_id": String,
     "phone": String,
     "latitude": String,
     "longitude": String,
     "address": String"
 
 ### Contact
-    "_id": String,
     "contactType": Int,
     "data": String
 
 ### Service
-     "_id": String,
      "name": String,
      "price": Int,
      "description": String
      
 ### Image 
-     "_id": String,
      "isLogo": Bool,
      "imagePath": String
     
 ### Course
-    "_id": String,
     "name": String,
     "description" : String,
     "branches": Array<Branch>,
@@ -80,12 +73,10 @@ Back-End for Courses. MongoDB and MySQL versions.
     "images": Array<Image>
      
 ### CourseBranch
-    "_id": String,
     "name": String,
     "branches: Array<Branch>
     
 ### SimplifiedCourse
-    "_id": String,
     "name": String,
     "description": String,
     "images": Array<Image>
