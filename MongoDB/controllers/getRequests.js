@@ -70,7 +70,13 @@ module.exports = function(app) {
   })
 
   app.get('/getAllContactTypes', function(request, response) {
-
+    var result =  [
+    {"contactTypeInt": 1, "contactTypeName": "Телефон"},
+    {"contactTypeInt": 2, "contactTypeName": "Почта"},
+    {"contactTypeInt": 3, "contactTypeName": "WhatsApp"},
+    {"contactTypeInt": 4, "contactTypeName": "Facebook"},
+    {"contactTypeInt": 5, "contactTypeName": "Instagram"}]
+    response.send(result)
   })
 
   app.get('/getCoursesByCategory/:category', function(request, response) {
