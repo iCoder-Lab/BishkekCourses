@@ -13,13 +13,13 @@ Back-End for Courses. MongoDB and MySQL versions.
 ## Get Requests
 * /getAllCourses
    - returns Array< SimplifiedCourse >
-* /getCoursesByCategory/{category.name}
+* /getCoursesByCategory/{categoryname}
    - returns Array < SimplifiedCourse >
-* /getCoursesBySubcategory/{subCategory.name}
+* /getCoursesBySubcategory/{subCategoryname}
    - returns Array< SimplifiedCourse >
-* /getCoursesByBoth/{category.name}/{subCategory.name}
+* /getCoursesByBoth/{categoryname}/{subCategoryname}
    - returns Array< SimplifiedCourse >
-* /getCourseByName/{course.name}
+* /getCourseByName/{coursename}
    - returns Course
 * /getAllBranches
    - returns Array< Branch >
@@ -30,10 +30,10 @@ Back-End for Courses. MongoDB and MySQL versions.
 
 
 ## Delete Requests
-    * /deleteCourse/{course._id}
-    * /deleteCategory/{category.name} 
+    * /deleteCourse/{coursename}
+    * /deleteCategory/{categoryname} 
     - !!! works if category does not contain any course
-    * /deleteSubCategory/{subCategory.name}
+    * /deleteSubCategory/{subcategoryname}
     - !!! works if category does not contain any course
 
 # Models:
