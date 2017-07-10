@@ -17,7 +17,9 @@ Back-End for Courses. MongoDB and MySQL versions.
    - returns Array < SimplifiedCourse >
 * /getCoursesBySubcategory/{subCategory.name}
    - returns Array< SimplifiedCourse >
-* /getCourseByID/{course._id}
+* /getCoursesByBoth/{category.name}/{subCategory.name}
+   - returns Array< SimplifiedCourse >
+* /getCourseByName/{course._id}
    - returns Course
 * /getAllBranches
    - returns Array< Branch >
