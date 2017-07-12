@@ -9,12 +9,11 @@ var models = require('../database/models/models')
 module.exports = function(app) {
   app.post('/addCourse', bP, function(request, response) {
     var inp = request.body
-
     for(var i = 0; i < inp.categories.length; i++) {
       var category = new models.Category(inp.categories[i])
       category.save(function (err, c) {
         if (err)
-          console.log("category " + inp.categories[i].name +" already exists")
+          console.log({error: err})
       })
     }
 
@@ -22,7 +21,7 @@ module.exports = function(app) {
       var branch = new models.Branch(inp.branches[i])
       branch.save(function (err, c) {
         if (err)
-          console.log("branch already exists")
+          console.log({error: err})
       })
     }
 
@@ -30,19 +29,19 @@ module.exports = function(app) {
     course.markModified('name')
     course.save(function (err, updated) {
       if (err)
-        console.log("course " + inp.name + " already exists")
+        console.log({error: err})
     })
-    response.json(course)
+    response.send({error: ""})
   })
 
   app.post('/addCategory', bP, function(request, response) {
     var inp = request.body
     var category = new models.Category(inp)
     models.Category
-    .find({'name': inp.name}).limit(1)
+    .find({'name': inp.name})
     .then(function(result) {
       if(result.length != 0) {
-        response.send({error:'Muhamed, No No. That course already exists...'})
+        response.send({error:'That course already exists...'})
       }
       else {
         try {
@@ -51,7 +50,7 @@ module.exports = function(app) {
               response.send({error:error})
             }
             else {
-              response.send()
+              response.send({error: ""})
             }
           })
         }
@@ -59,23 +58,22 @@ module.exports = function(app) {
           response.send({error: e})
         }
       }
-      })
-      .catch(function(error) {
-       response.send({error: error})
-      })
+    })
+    .catch(function(error) {
+     response.send({error: error})
+    })
   })
 
   app.post('/addSubCategories', bP, function(request, response) {
     var inp = request.body
-    console.log(inp.subCategories);
     models.Category.update(
       { name: inp.name },
-      { $push: {subCategories: { $each: inp.subCategories}}}, function (err, res){
+      { $push: {subcategories: { $each: inp.subcategories}}}, function (err, res){
         if(err) {
           response.send({error: err})
         }
         else {
-          response.send()
+          response.send({error: ""})
         }
       }
     )

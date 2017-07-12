@@ -11,7 +11,7 @@ module.exports = function(app) {
     models.Course
     .findOneAndRemove({'name': request.params.coursename})
     .then(function(result) {
-      response.send(request.params.coursename + " course has been deleted")
+      response.send({error: ""})
     })
     .catch(function(err) {
       response.send({error: err})
@@ -28,10 +28,10 @@ module.exports = function(app) {
           .exec()
           .then(function(r) {
             if(r.length == 0) {
-              response.send('category not found')
+              response.send({error:'category not found'})
             }
             else {
-              response.send('category has been deleted')
+              response.send({error:''})
             }
           })
           .catch(function(err) {
@@ -40,7 +40,7 @@ module.exports = function(app) {
         }
 
         else {
-          response.send('Category could not be deleted.')
+          response.send({error:'Category could not be deleted.'})
         }
       })
       .catch(function(error) {
@@ -50,19 +50,19 @@ module.exports = function(app) {
 
   app.delete('/deleteSubCategory/:subcategoryname', function(request, response) {
     models.Course
-      .find({"categories.subCategories.name": request.params.subcategoryname})
+      .find({"categories.subcategories.name": request.params.subcategoryname})
       .select({"name": 1})
       .then(function(result) {
         if(result.length == 0) {
           models.Category
-          .remove({"subCategories.name": request.params.subcategoryname})
+          .remove({"subcategories.name": request.params.subcategoryname})
           .then(function(r) {
             if(r.length == 0) {
-              response.send("subCategory not found.")
+              response.send({error:"subCategory not found."})
             }
 
             else {
-              response.send("subCategory has been deleted.")
+              response.send({error:""})
             }
 
           })
@@ -72,7 +72,7 @@ module.exports = function(app) {
         }
 
         else {
-            response.send('subCategory could not be deleted.')
+            response.send({error:'subCategory could not be deleted.'})
         }
       })
       .catch(function(error) {

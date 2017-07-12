@@ -36,6 +36,7 @@ module.exports = function(app) {
     .then(function(result) {
       models.Branch
         .find({})
+        .select({"_id": 0})
         .then(function(branches) {
           response.send(branches)
         })
@@ -60,6 +61,7 @@ module.exports = function(app) {
     .then(function(result) {
       models.Category
         .find()
+        .select({"_id": 0, "subcategories._id": 0})
         .then(function(branches) {
           response.send(branches)
         })
@@ -70,7 +72,14 @@ module.exports = function(app) {
   })
 
   app.get('/getAllContactTypes', function(request, response) {
-
+    var result =  [
+    {"contacttypeint": 1, "contacttypename": "Телефон"},
+    {"contacttypeint": 2, "contacttypename": "Почта"},
+    {"contacttypeint": 3, "contacttypename": "WhatsApp"},
+    {"contacttypeint": 4, "contacttypename": "Facebook"},
+    {"contacttypeint": 5, "contacttypename": "Instagram"},
+    {"contacttypeint": 6, "contacttypename": "Website"}]
+    response.send(result)
   })
 
   app.get('/getCoursesByCategory/:category', function(request, response) {
@@ -86,15 +95,14 @@ module.exports = function(app) {
       })
   })
 
-  app.get('/getCoursesBySubcategory/:subCategory', function(request, response) {
+  app.get('/getCoursesBySubcategory/:subcategory', function(request, response) {
     models.Course
-      .find({"categories.subCategories.name": request.params.subCategory})
+      .find({"categories.subcategories.name": request.params.subcategory})
       .select({"name": 1, "description": 2, "images": 3, "_id": 0})
       .then(function(result) {
         response.send(result)
       })
       .catch(function(error) {
-        console.log(error)
         response.send({error:error})
       })
   })
@@ -106,14 +114,13 @@ module.exports = function(app) {
         response.send(result)
       })
       .catch(function(error) {
-        console.log(error)
         response.send({error: error})
       })
   })
 
   app.get('/getCourseByBoth/:categoryname/:subcatname', function(request, response) {
     models.Course
-      .find({ $and: [{'categories.name': request.params.categoryname}, {'categories.subCategories.name': request.params.subcatname}]})
+      .find({ $and: [{'categories.name': request.params.categoryname}, {'categories.subcategories.name': request.params.subcatname}]})
       .select({'name': 2, 'images': 3, 'description': 4, '_id': 0})
       .then(function(result) {
         response.send(result)

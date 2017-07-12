@@ -3,17 +3,17 @@ var mongoose = require('mongoose'),
     autoIncrement = require('mongoose-auto-increment');
 
 //var connect = mongoose.connect('mongodb://127.0.0.1/test', {useMongoClient: true})
-var subCategory = new Schema ({
+var subcategory = new Schema ({
   name: String,
-  imgPath: String
-})
-var subCategories = []
-subCategories.push(subCategory)
+  imgpath: String
+}, { versionKey: false })
+var subcategories = []
+subcategories.push(subcategory)
 
 var category = new Schema ({
   name: String,
-  subCategories: subCategories
-})
+  subcategories: subcategories
+}, { versionKey: false })
 var categories = []
 categories.push(category)
 
@@ -22,14 +22,14 @@ var branch = new Schema ({
   latitude: String,
   longitude: String,
   phone: String
-})
+}, { versionKey: false })
 var branches = []
 branches.push(branch)
 
 var contact = new Schema ({
-  contactType: Number,
+  contacttype: Number,
   data: String
-})
+}, { versionKey: false })
 var contacts = []
 contacts.push(contact)
 
@@ -37,14 +37,14 @@ var service = new Schema ({
   description: String,
   name: String,
   price: Number
-})
+}, { versionKey: false })
 var services = []
 services.push(service)
 
 var image = new Schema ({
-  imagePath: String,
-  isLogo: Boolean
-})
+  imgpath: String,
+  islogo: Boolean
+}, { versionKey: false })
 var images = []
 images.push(image)
 
@@ -56,10 +56,11 @@ var course = new Schema ({
     contacts: contacts,
     images: images,
     services: services
-})
+}, { versionKey: false })
 
 module.exports = {
   Course : mongoose.model('Course', course),
   Category : mongoose.model('Category', category),
-  Branch : mongoose.model('Branch', branch)
+  Branch : mongoose.model('Branch', branch),
+  Subcategory : mongoose.model('subCategory', subcategory)
 }
