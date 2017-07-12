@@ -13,38 +13,38 @@ Back-End for Courses. MongoDB and MySQL versions.
 ## Get Requests
 * /getAllCourses
    - returns Array< SimplifiedCourse >
-* /getCoursesByCategory/{category.name}
+* /getCoursesByCategory/{categoryname}
    - returns Array < SimplifiedCourse >
-* /getCoursesBySubcategory/{subCategory.name}
+* /getCoursesBySubcategory/{subCategoryname}
    - returns Array< SimplifiedCourse >
-* /getCoursesByBoth/{category.name}/{subCategory.name}
+* /getCoursesByBoth/{categoryname}/{subCategoryname}
    - returns Array< SimplifiedCourse >
-* /getCourseByName/{course.name}
+* /getCourseByName/{coursename}
    - returns Course
 * /getAllBranches
    - returns Array< Branch >
 * /getAllCategories
    - returns Array< Category >
 * /getAllContactTypes
-   - returns Array< Category >
+   - returns Array< PostContactType >
 
 
 ## Delete Requests
-    * /deleteCourse/{course._id}
-    * /deleteCategory/{category.name} 
+    * /deleteCourse/{coursename}
+    * /deleteCategory/{categoryname} 
     - !!! works if category does not contain any course
-    * /deleteSubCategory/{subCategory.name}
+    * /deleteSubCategory/{subcategoryname}
     - !!! works if category does not contain any course
 
 # Models:
 
 ### SubCategory
     "name": String,
-    "imagePath": String
+    "imgpath": String
     
 ### Category
     "name": String,
-    "subCategories": Array<SubCategory>
+    "subcategories": Array<SubCategory>
 
 ### Branch
     "phone": String,
@@ -53,7 +53,7 @@ Back-End for Courses. MongoDB and MySQL versions.
     "address": String"
 
 ### Contact
-    "contactType": Int,
+    "contacttype": Int,
     "data": String
 
 ### Service
@@ -62,8 +62,8 @@ Back-End for Courses. MongoDB and MySQL versions.
      "description": String
      
 ### Image 
-     "isLogo": Bool,
-     "imagePath": String
+     "islogo": Bool,
+     "imgpath": String
     
 ### Course
     "name": String,
@@ -73,10 +73,6 @@ Back-End for Courses. MongoDB and MySQL versions.
     "services": Array<Service>,
     "categories": Array<Category>,
     "images": Array<Image>
-     
-### CourseBranch
-    "name": String,
-    "branches: Array<Branch>
     
 ### SimplifiedCourse
     "name": String,
@@ -84,10 +80,12 @@ Back-End for Courses. MongoDB and MySQL versions.
     "images": Array<Image>
     
 ### PostSubCategories
-    "categoryName": String,
-    "subCategories": Array<SubCategory>
-    
+    "categoryname": String,
+    "subcategories": Array<SubCategory>
+         
+### PostContactType
+    "contacttypeint": Int,
+    "contacttypename: String
     
 ### ErrorModel
     "error": String
-
