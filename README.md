@@ -80,7 +80,7 @@ Back-End for Courses. MongoDB and MySQL versions.
     "images": Array<Image>
     
 ### PostSubCategories
-    "categoryname": String,
+    "name": String,
     "subcategories": Array<SubCategory>
          
 ### PostContactType
