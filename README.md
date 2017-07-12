@@ -40,7 +40,7 @@ Back-End for Courses. MongoDB and MySQL versions.
 
 ### SubCategory
     "name": String,
-    "imagePath": String
+    "imgPath": String
     
 ### Category
     "name": String,
