@@ -40,11 +40,11 @@ Back-End for Courses. MongoDB and MySQL versions.
 
 ### SubCategory
     "name": String,
-    "imgPath": String
+    "imgpath": String
     
 ### Category
     "name": String,
-    "subCategories": Array<SubCategory>
+    "subcategories": Array<SubCategory>
 
 ### Branch
     "phone": String,
@@ -53,7 +53,7 @@ Back-End for Courses. MongoDB and MySQL versions.
     "address": String"
 
 ### Contact
-    "contactType": Int,
+    "contacttype": Int,
     "data": String
 
 ### Service
@@ -62,8 +62,8 @@ Back-End for Courses. MongoDB and MySQL versions.
      "description": String
      
 ### Image 
-     "isLogo": Bool,
-     "imagePath": String
+     "islogo": Bool,
+     "imgpath": String
     
 ### Course
     "name": String,
@@ -80,12 +80,12 @@ Back-End for Courses. MongoDB and MySQL versions.
     "images": Array<Image>
     
 ### PostSubCategories
-    "categoryName": String,
-    "subCategories": Array<SubCategory>
+    "categoryname": String,
+    "subcategories": Array<SubCategory>
          
 ### PostContactType
-    "contactTypeInt": Int,
-    "contactTypeName: String
+    "contacttypeint": Int,
+    "contacttypename: String
     
 ### ErrorModel
     "error": String
