@@ -51,20 +51,19 @@ module.exports = function(app) {
   app.delete('/deleteSubCategory/:subcategoryname', function(request, response) {
     models.Course
       .find({"categories.subcategories.name": request.params.subcategoryname})
-      .select({"name": 1})
       .then(function(result) {
         if(result.length == 0) {
           models.Category
-          .remove({"subcategories.name": request.params.subcategoryname})
+          .update({"subcategories.name": request.params.subcategoryname},
+                  {$pull: {subcategories: {name: request.params.subcategoryname}}},
+                  { multi: true })
           .then(function(r) {
             if(r.length == 0) {
               response.send({error:"subCategory not found."})
             }
-
             else {
               response.send({error:""})
             }
-
           })
           .catch(function(err) {
             response.send({error: err})

@@ -61,6 +61,5 @@ var course = new Schema ({
 module.exports = {
   Course : mongoose.model('Course', course),
   Category : mongoose.model('Category', category),
-  Branch : mongoose.model('Branch', branch),
-  Subcategory : mongoose.model('subCategory', subcategory)
+  Branch : mongoose.model('Branch', branch)
 }
