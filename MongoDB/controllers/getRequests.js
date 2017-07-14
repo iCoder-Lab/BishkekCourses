@@ -111,7 +111,7 @@ module.exports = function(app) {
     models.Course
       .find({"name": request.params.name})
       .then(function(result) {
-        response.send(result)
+        response.send(result[0])
       })
       .catch(function(error) {
         response.send({error: error})
