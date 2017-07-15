@@ -10,6 +10,17 @@ module.exports = function(app) {
   app.get('/getAllCourses', function(request, response) {
     models.Course
       .find()
+      .then(function(branches) {
+        response.send(branches)
+      })
+      .catch(function(error) {
+        response.send({error:"error"})
+      })
+  })
+
+  app.get('/getAllSimplifiedCourses', function(request, response) {
+    models.Course
+      .find()
       .select({"name": 1, "description": 2, "images": 3, "_id": 0})
       .then(function(branches) {
         response.send(branches)
