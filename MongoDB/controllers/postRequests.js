@@ -9,14 +9,6 @@ var models = require('../database/models/models')
 module.exports = function(app) {
   app.post('/addCourse', bP, function(request, response) {
     var inp = request.body
-    for(var i = 0; i < inp.categories.length; i++) {
-      var category = new models.Category(inp.categories[i])
-      category.save(function (err, c) {
-        if (err)
-          console.log({error: err})
-      })
-    }
-
     for(var i = 0; i < inp.branches.length; i++) {
       var branch = new models.Branch(inp.branches[i])
       branch.save(function (err, c) {
@@ -37,45 +29,66 @@ module.exports = function(app) {
   app.post('/addCategory', bP, function(request, response) {
     var inp = request.body
     var category = new models.Category(inp)
-    models.Category
-    .find({'name': inp.name})
-    .then(function(result) {
-      if(result.length != 0) {
-        response.send({error:'That course already exists...'})
+    for(var i = 0; i < inp.subcategories.length; ++i) {
+      var subcategory = new models.SubCategory(inp.subcategories[i])
+      subcategory
+      .save(function (error, result) {
+        if (error) {
+
+        }
+      })
+    }
+
+    category
+    .save(function (error, result) {
+      if (error) {
+        response.send({error:error})
+        return
       }
       else {
-        try {
-          category.save(function (error, result) {
-            if (error) {
-              response.send({error:error})
-            }
-            else {
-              response.send({error: ""})
-            }
-          })
-        }
-        catch(e) {
-          response.send({error: e})
-        }
+        response.send({error: ""})
       }
-    })
-    .catch(function(error) {
-     response.send({error: error})
     })
   })
 
   app.post('/addSubCategories', bP, function(request, response) {
     var inp = request.body
-    models.Category.update(
-      { name: inp.name },
-      { $push: {subcategories: { $each: inp.subcategories}}}, function (err, res){
-        if(err) {
-          response.send({error: err})
+    var isItValid = true
+    for(var i = 0; i < inp.subcategories.length; ++i) {
+      models.SubCategory
+      .find({"name": inp.subcategories[i].name})
+      .then(function(result){
+        if(result.length > 0) {
+          isItValid = false
         }
-        else {
-          response.send({error: ""})
+      })
+    }
+    models.Category
+    .find({"name": inp.name})
+    .then(function(result){
+      if(isItValid && result.length > 0) {
+        for(var i = 0; i < inp.subcategories.length; ++i) {
+          var subcategory = new models.SubCategory(inp.subcategories[i])
+          subcategory.save(function (error, result) {
+            if (error) {
+              console.log(error);
+            }
+          })
         }
+        models.Category.update(
+          { name: inp.name },
+          { $push: {subcategories: { $each: inp.subcategories}}}, function (err, res){
+          if(err) {
+            console.log(error);
+          }
+          else {
+            response.send({error: ""})
+          }
+        })
       }
-    )
+      else {
+        response.send({error: "subcategory already exists"})
+      }
+    })
   })
 }

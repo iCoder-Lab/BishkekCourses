@@ -10,8 +10,8 @@ module.exports = function(app) {
   app.get('/getAllCourses', function(request, response) {
     models.Course
       .find()
-      .then(function(branches) {
-        response.send(branches)
+      .then(function(result) {
+        response.send(result)
       })
       .catch(function(error) {
         response.send({error:"error"})
@@ -22,8 +22,8 @@ module.exports = function(app) {
     models.Course
       .find()
       .select({"name": 1, "description": 2, "images": 3, "_id": 0})
-      .then(function(branches) {
-        response.send(branches)
+      .then(function(result) {
+        response.send(result)
       })
       .catch(function(error) {
         response.send({error:"error"})
@@ -48,8 +48,8 @@ module.exports = function(app) {
       models.Branch
         .find({})
         .select({"_id": 0})
-        .then(function(branches) {
-          response.send(branches)
+        .then(function(result) {
+          response.send(result)
         })
         .catch(function(error) {
           response.send({error:error})
@@ -73,8 +73,8 @@ module.exports = function(app) {
       models.Category
         .find()
         .select({"_id": 0, "subcategories._id": 0})
-        .then(function(branches) {
-          response.send(branches)
+        .then(function(res) {
+          response.send(res)
         })
         .catch(function(error) {
           response.send({error:error})
@@ -101,7 +101,6 @@ module.exports = function(app) {
         response.send(result)
       })
       .catch(function(error) {
-        console.log(error)
         response.send({error:error})
       })
   })
