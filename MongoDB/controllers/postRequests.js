@@ -34,7 +34,7 @@ module.exports = function(app) {
       subcategory
       .save(function (error, result) {
         if (error) {
-
+          console.log(error)
         }
       })
     }
@@ -42,7 +42,7 @@ module.exports = function(app) {
     category
     .save(function (error, result) {
       if (error) {
-        response.send({error:error})
+        response.status(404).send({error:error})
         return
       }
       else {
@@ -87,7 +87,7 @@ module.exports = function(app) {
         })
       }
       else {
-        response.send({error: "subcategory already exists"})
+        response.status(404).send({error: "subcategory already exists"})
       }
     })
   })

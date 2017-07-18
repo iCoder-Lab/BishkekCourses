@@ -14,7 +14,7 @@ module.exports = function(app) {
         response.send(result)
       })
       .catch(function(error) {
-        response.send({error:"error"})
+        response.status(404).send({error:"error"})
       })
   })
 
@@ -26,7 +26,7 @@ module.exports = function(app) {
         response.send(result)
       })
       .catch(function(error) {
-        response.send({error:"error"})
+        response.status(404).send({error:"error"})
       })
   })
 
@@ -52,7 +52,7 @@ module.exports = function(app) {
           response.send(result)
         })
         .catch(function(error) {
-          response.send({error:error})
+          response.status(404).send({error:error})
         })
     })
   })
@@ -77,7 +77,7 @@ module.exports = function(app) {
           response.send(res)
         })
         .catch(function(error) {
-          response.send({error:error})
+          response.status(404).send({error:error})
         })
     })
   })
@@ -101,7 +101,7 @@ module.exports = function(app) {
         response.send(result)
       })
       .catch(function(error) {
-        response.send({error:error})
+        response.status(404).send({error:error})
       })
   })
 
@@ -113,7 +113,7 @@ module.exports = function(app) {
         response.send(result)
       })
       .catch(function(error) {
-        response.send({error:error})
+        response.status(404).send({error:error})
       })
   })
 
@@ -124,7 +124,7 @@ module.exports = function(app) {
         response.send(result[0])
       })
       .catch(function(error) {
-        response.send({error: error})
+        response.status(404).send({error: error})
       })
   })
 
@@ -136,7 +136,7 @@ module.exports = function(app) {
         response.send(result)
       })
       .catch(function(error) {
-        response.send({error:error})
+        response.status(404).send({error:error})
       })
   })
 }

@@ -14,7 +14,7 @@ module.exports = function(app) {
       response.send({error: ""})
     })
     .catch(function(err) {
-      response.send({error: err})
+      response.status(404).send({error: err})
     })
   })
 
@@ -28,23 +28,23 @@ module.exports = function(app) {
           .exec()
           .then(function(r) {
             if(r.length == 0) {
-              response.send({error:'category not found'})
+              response.status(404).send({error:'category not found'})
             }
             else {
               response.send({error:''})
             }
           })
           .catch(function(err) {
-            response.send({error: err})
+            response.status(404).send({error: err})
           })
         }
 
         else {
-          response.send({error:'Category could not be deleted.'})
+          response.status(404).send({error:'Category could not be deleted.'})
         }
       })
       .catch(function(error) {
-        response.send({error:error})
+        response.status(404).send({error:error})
       })
   })
 
@@ -59,23 +59,23 @@ module.exports = function(app) {
                   { multi: true })
           .then(function(r) {
             if(r.length == 0) {
-              response.send({error:"subCategory not found."})
+              response.status(404).send({error:"subCategory not found."})
             }
             else {
               response.send({error:""})
             }
           })
           .catch(function(err) {
-            response.send({error: err})
+            response.status(404).send({error: err})
           })
         }
 
         else {
-            response.send({error:'subCategory could not be deleted.'})
+            response.status(404).send({error:'subCategory could not be deleted.'})
         }
       })
       .catch(function(error) {
-        response.send({error:error})
+        response.status(404).send({error:error})
       })
   })
 }
