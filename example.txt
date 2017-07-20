@@ -1,0 +1,87 @@
+
+	{
+		"name": "test1",
+		"description" : "description1",
+		"branches": 
+		[
+			{
+				"phone": "branchesphone1",
+				"latitude": "brancheslatitude1",
+				"longitude": "brancheslongitude1",
+				"address": "branchesaddress1"
+			},
+			{
+				"phone": "branchesphone2",
+				"latitude": "brancheslatitude2",
+				"longitude": "brancheslongitude2",
+				"address": "branchesaddress2"
+			}
+		],
+		"contacts": 
+		[
+			{
+				"contactType": 1,
+				"data": "contactsdata1"
+			},
+			{
+				"contactType": 2,
+				"data": "contactsdata2"
+			}
+		],
+		"services":
+		[
+			{
+				"name": "servicesname1",
+				"price": 54,
+				"description": "servicesdescription1"
+			},
+			{
+				"name": "servicesname2",
+				"price": 45,
+				"description": "servicesdescription2"
+			}
+		],	
+		"categories": 
+		[
+			{		
+				"name": "categoriesname1",
+				"subCategories": 
+				[
+					{
+						"name": "subCategoriesname1",
+						"imagePath": "subCategoriesimagePath1"
+					},
+					{
+						"name": "subCategoriesname2",
+						"imagePath": "subCategoriesimagePath2"
+					}
+				]
+			},
+			{
+				"name": "categoriesname2",
+				"subCategories": 
+				[
+					{
+						"name": "subCategoriesname1",
+						"imagePath": "subCategoriesimagePath1"
+					},
+					{
+						"name": "subCategoriesname2",
+						"imagePath": "subCategoriesimagePath2"
+					}
+				]
+			}
+		],
+		"images": 
+		[
+			{
+				"isLogo": "imagesisLogo1",
+				"imagePath": "imagesimagePath1"
+			},
+					{
+				"isLogo": "imagesisLogo2",
+				"imagePath": "imagesimagePath2"
+			}
+		]
+	}
+
