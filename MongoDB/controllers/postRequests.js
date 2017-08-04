@@ -1,93 +1,143 @@
-var app = require('express')()
-var bP = require('body-parser').json()
-var mongoose = require('mongoose')
-mongoose.Promise = require('bluebird');
-var url = 'mongodb://127.0.0.1/courses'
-mongoose.connect(url, {useMongoClient: true});
-var models = require('../database/models/models')
+const async = require('async')
+const bP = require('body-parser').json()
+const mongoose = require('mongoose')
+mongoose.Promise = require('bluebird')
+const url = 'mongodb://127.0.0.1/courses'
+mongoose.connect(url, {useMongoClient: true})
+const models = require('../database/models/models')
 
 module.exports = function(app) {
   app.post('/addCourse', bP, function(request, response) {
-    var inp = request.body
-    for(var i = 0; i < inp.branches.length; i++) {
-      var branch = new models.Branch(inp.branches[i])
-      branch.save(function (err, c) {
-        if (err)
-          console.log({error: err})
-      })
-    }
-
-    var course = new models.Course(inp)
-    course.markModified('name')
-    course.save(function (err, updated) {
-      if (err)
-        console.log({error: err})
+    const inp = request.body
+    async.waterfall([
+      function(callback) {
+        if(inp.branches != undefined) {
+          async.each(inp.branches, function (item, callback) {
+            let branch = new models.Branch(item)
+            branch.save(function (error) {
+              console.log(error)
+              callback("some internal error")
+            })
+          callback(null)
+          })
+        }
+        else {
+          callback("you are required to have at least one branch")
+        }
+      },
+      function(callback) {
+        let course = new models.Course(inp)
+        course.markModified('name')
+        course.save(function (error, updated) {
+          if (error) {
+            console.log(error)
+            callback("could not save course")
+          }
+          else {
+            callback(null, "")
+          }
+        })
+      }
+    ], function (error, result) {
+      if(error) {
+        response.status(500).send({error: "error"})
+      }
+      else {
+        response.send({error: result})
+      }
     })
-    response.send({error: ""})
   })
 
   app.post('/addCategory', bP, function(request, response) {
-    var inp = request.body
-    var category = new models.Category(inp)
-    for(var i = 0; i < inp.subcategories.length; ++i) {
-      var subcategory = new models.SubCategory(inp.subcategories[i])
-      subcategory
-      .save(function (error, result) {
-        if (error) {
-          console.log(error)
+    const inp = request.body
+    async.waterfall([
+      function(callback) {
+        if(inp.subcategories != undefined) {
+          async.each(inp.subcategories, function (item, callback) {
+            let subcategory = new models.SubCategory(item)
+            subcategory.save(function (err) {
+              console.log(err);
+              callback("internal error")
+            })
+          })
+          callback(null)
         }
-      })
-    }
-
-    category
-    .save(function (error, result) {
-      if (error) {
-        response.status(404).send({error:error})
-        return
+        else {
+          callback("you are required to have at least one subcategory")
+        }
+      },
+      function(callback) {
+        let category = new models.Category(inp)
+        category
+        .save(function (error, result) {
+          if (error) {
+            console.log(error)
+            callback("could not save category")
+          }
+          else {
+            callback(null, "")
+          }
+        })
+      }
+    ], function (error, result) {
+      if(error) {
+        response.status(500).send({error: "error"})
       }
       else {
-        response.send({error: ""})
+        response.send({error: result})
       }
     })
   })
 
   app.post('/addSubCategories', bP, function(request, response) {
-    var inp = request.body
-    var isItValid = true
-    for(var i = 0; i < inp.subcategories.length; ++i) {
-      models.SubCategory
-      .find({"name": inp.subcategories[i].name})
-      .then(function(result){
-        if(result.length > 0) {
-          isItValid = false
-        }
-      })
-    }
-    models.Category
-    .find({"name": inp.name})
-    .then(function(result){
-      if(isItValid && result.length > 0) {
-        for(var i = 0; i < inp.subcategories.length; ++i) {
-          var subcategory = new models.SubCategory(inp.subcategories[i])
-          subcategory.save(function (error, result) {
-            if (error) {
-              console.log(error);
-            }
-          })
-        }
-        models.Category.update(
-          { name: inp.name },
-          { $push: {subcategories: { $each: inp.subcategories}}}, function (err, res){
-          if(err) {
-            console.log(error);
+    const inp = request.body
+    async.waterfall([
+      function(callback) {
+        models.Category
+        .find({"name": inp.name})
+        .then(function(result){
+          if(result.length > 0) {
+            callback(null)
           }
           else {
-            response.send({error: ""})
+            callback("no such a category")
+          }
+        })
+      },
+      function(callback) {
+        if(inp.subcategories != undefined) {
+          async.each(inp.subcategories, function (item, callback) {
+            let subcategory = new models.SubCategory(item)
+            subcategory.save(function (error) {
+              console.log(error);
+              callback("subcategory already exists")
+            })
+          callback(null)
+          })
+        }
+        else {
+          callback("you are required to have at least one subcategory")
+        }
+      },
+      function(callback) {
+        models.Category.update(
+          { name: inp.name },
+          { $push: {subcategories: { $each: inp.subcategories}}}, function (error, res){
+          if(error) {
+            console.log(error);
+            callback("error");
+          }
+          else {
+            callback(null, "")
           }
         })
       }
+    ], function (error, result) {
+      if(error) {
+        response.status(500).send({error: "error"})
+      }
       else {
-        response.status(404).send({error: "subcategory already exists"})
+        response.send({error: result})
       }
     })
   })

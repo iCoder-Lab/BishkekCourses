@@ -1,10 +1,9 @@
-var app = require('express')()
-var bP = require('body-parser').json()
-var mongoose = require('mongoose')
-mongoose.Promise = require('bluebird');
-var url = 'mongodb://127.0.0.1/courses'
+const async = require('async')
+const bP = require('body-parser').json()
+const mongoose = require('mongoose')
+const url = 'mongodb://127.0.0.1/courses'
 mongoose.connect(url, {useMongoClient: true});
-var models = require('../database/models/models')
+const models = require('../database/models/models')
 
 module.exports = function(app) {
   app.delete('/deleteCourse/:coursename', function(request, response) {
@@ -13,8 +12,9 @@ module.exports = function(app) {
     .then(function(result) {
       response.send({error: ""})
     })
-    .catch(function(err) {
-      response.status(404).send({error: err})
+    .catch(function(error) {
+      console.log(error);
+      response.status(404).send({error: "error"})
     })
   })
 
@@ -34,8 +34,9 @@ module.exports = function(app) {
               response.send({error:''})
             }
           })
-          .catch(function(err) {
-            response.status(404).send({error: err})
+          .catch(function(error) {
+            console.log(error);
+            response.status(404).send({error: "error"})
           })
         }
 
@@ -44,7 +45,8 @@ module.exports = function(app) {
         }
       })
       .catch(function(error) {
-        response.status(404).send({error:error})
+        console.log(error);
+        response.status(404).send({error:"error"})
       })
   })
 
@@ -65,8 +67,9 @@ module.exports = function(app) {
               response.send({error:""})
             }
           })
-          .catch(function(err) {
-            response.status(404).send({error: err})
+          .catch(function(error) {
+            console.log(error);
+            response.status(404).send({error: "error"})
           })
         }
 
@@ -75,7 +78,8 @@ module.exports = function(app) {
         }
       })
       .catch(function(error) {
-        response.status(404).send({error:error})
+        console.log(error);
+        response.status(404).send({error:"error"})
       })
   })
 }

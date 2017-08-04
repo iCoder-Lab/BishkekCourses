@@ -1,10 +1,10 @@
-var app = require('express')()
-var bP = require('body-parser').json()
-var mongoose = require('mongoose')
+const app = require('express')()
+const bP = require('body-parser').json()
+const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird');
-var url = 'mongodb://127.0.0.1/courses'
+const url = 'mongodb://127.0.0.1/courses'
 mongoose.connect(url, {useMongoClient: true});
-var models = require('../database/models/models')
+const models = require('../database/models/models')
 
 module.exports = function(app) {
   app.get('/getAllCourses', function(request, response) {
@@ -14,6 +14,7 @@ module.exports = function(app) {
         response.send(result)
       })
       .catch(function(error) {
+        console.log(error);
         response.status(404).send({error:"error"})
       })
   })
@@ -26,6 +27,7 @@ module.exports = function(app) {
         response.send(result)
       })
       .catch(function(error) {
+        console.log(error);
         response.status(404).send({error:"error"})
       })
   })
@@ -52,7 +54,8 @@ module.exports = function(app) {
           response.send(result)
         })
         .catch(function(error) {
-          response.status(404).send({error:error})
+          console.log(error);
+          response.status(404).send({error:"error"})
         })
     })
   })
@@ -77,7 +80,8 @@ module.exports = function(app) {
           response.send(res)
         })
         .catch(function(error) {
-          response.status(404).send({error:error})
+          console.log(error);
+          response.status(404).send({error:"error"})
         })
     })
   })
@@ -101,7 +105,8 @@ module.exports = function(app) {
         response.send(result)
       })
       .catch(function(error) {
-        response.status(404).send({error:error})
+        console.log(error);
+        response.status(404).send({error:"error"})
       })
   })
 
@@ -113,7 +118,8 @@ module.exports = function(app) {
         response.send(result)
       })
       .catch(function(error) {
-        response.status(404).send({error:error})
+        console.log(error);
+        response.status(404).send({error:"error"})
       })
   })
 
@@ -124,7 +130,8 @@ module.exports = function(app) {
         response.send(result[0])
       })
       .catch(function(error) {
-        response.status(404).send({error: error})
+        console.log(error);
+        response.status(404).send({error: "error"})
       })
   })
 
@@ -136,7 +143,8 @@ module.exports = function(app) {
         response.send(result)
       })
       .catch(function(error) {
-        response.status(404).send({error:error})
+        console.log(error);
+        response.status(404).send({error:"error"})
       })
   })
 }

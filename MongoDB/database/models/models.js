@@ -4,14 +4,14 @@ var mongoose = require('mongoose'),
 
 //var connect = mongoose.connect('mongodb://127.0.0.1/test', {useMongoClient: true})
 var subcategory = new Schema ({
-  name: { type: String, unique: true },
+  name: { type: String, required: true, unique: true },
   imgpath: String
 }, { versionKey: false })
 var subcategories = []
 subcategories.push(subcategory)
 
 var category = new Schema ({
-  name: { type: String, unique: true },
+  name: { type: String, required: true, unique: true },
   subcategories: subcategories
 }, { versionKey: false })
 var categories = []
@@ -49,7 +49,7 @@ var images = []
 images.push(image)
 
 var course = new Schema ({
-    name: { type: String, unique: true },
+    name: { type: String, required: true, unique: true },
     description: String,
     branches: branches,
     categories: categories,
