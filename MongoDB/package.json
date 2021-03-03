@@ -1,6 +1,6 @@
 {
   "name": "example",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MongoDB Example",
   "main": "app.js",
   "scripts": {
@@ -9,12 +9,12 @@
   "author": "Saitbaev Mamurjon",
   "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.17.2",
-    "ejs": "^2.5.6",
-    "express": "^4.15.3",
-    "mongo": "^0.1.0",
-    "mongoose": "^4.11.1",
-    "mongoose-auto-increment": "^5.0.1",
-    "pug": "^2.0.0-rc.2"
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mongo": "*",
+    "mongoose": "^5.11.18",
+    "mongoose-auto-increment": "^4.0.0",
+    "pug": "^3.0.2"
   }
 }
